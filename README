@@ -1,0 +1,21 @@
+/*******************************
+ * Andrew Dillon
+ * 2382400
+ * CPSC 350
+ * Assignment 02
+ *******************************/
+
+Help with better random number generation
+http://www.cplusplus.com/reference/cstdlib/srand/
+
+Help passing cout to a function
+https://www.youtube.com/watch?v=HwtFcT-ueu8
+
+Help creating dynamic 2d arrays
+https://stackoverflow.com/questions/936687/how-do-i-declare-a-2d-array-in-c-using-new
+
+Help error handing character input when expecting numeric input
+https://stackoverflow.com/questions/11523569/how-can-i-avoid-char-input-for-an-int-variable
+
+Help with move assignment operator
+https://docs.microsoft.com/en-us/cpp/cpp/move-constructors-and-move-assignment-operators-cpp?view=vs-2019
