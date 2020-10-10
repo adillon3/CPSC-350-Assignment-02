@@ -4,10 +4,7 @@
  * CPSC 350
  * Assignment 02
  *******************************/
-
 #include "assign2.h"
-
-
 
 int main()
 {

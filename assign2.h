@@ -33,7 +33,8 @@ void CreateAndAssignGameModeRandom(GameMode* &myGameMode);
 void CreateAndAssignGameModeFile(GameMode* &myGameMode);
 char GetOutputLocationChar();
 string GetInputFileName();
+bool CheckLineForVaildChars(string currentString);
+bool InputFormatedCorrectly(ifstream & infile);
 string GetFileName();
-void RunSimulation(GameMode* &myGameMode, ostream& output);
 
 #endif /* ASSIGN2_H_ */

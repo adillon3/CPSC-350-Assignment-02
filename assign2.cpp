@@ -130,7 +130,6 @@ void CreateAndAssignGameModeRandom(GameMode* &myGameMode)
     myGameMode = new MirrorGM(numRows, numCol, density);
   }
 }
-
 unsigned int GetUnsignedIntFromConsole(string dimension)
 {
   bool invalidInput = true;
@@ -165,7 +164,6 @@ unsigned int GetUnsignedIntFromConsole(string dimension)
 
   return returnInt;
 }
-
 void CreateAndAssignGameModeFile(GameMode* &myGameMode)
 {
   //Get file name from user
@@ -188,7 +186,6 @@ void CreateAndAssignGameModeFile(GameMode* &myGameMode)
     myGameMode = new MirrorGM(fileName);
   }
 }
-
 char GetOutputLocationChar()
 {
   char autoOrEnterChar;
@@ -222,7 +219,78 @@ char GetOutputLocationChar()
 
   return autoOrEnterChar;
 }
+bool CheckLineForVaildChars(string currentString)
+{
+  int currentLength = currentString.length();
 
+  for(int i = 0; i < currentLength; ++i)
+  {
+    if(currentString[i] != 'X' && currentString[i] != 'x' && currentString[i] != '-')
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool InputFormatedCorrectly(ifstream & inFile)
+{
+  int statedNumRows;
+  int statedNumCol;
+  string temp1;
+  string temp2;
+  int tempLength1;
+  int tempLength2;
+  int countedRows = 0;
+
+  //check that the first line is a digit
+  inFile >> statedNumRows;
+
+  if(inFile.fail())
+  {
+    inFile.clear();
+    inFile.ignore(100000000, '\n');
+    return false;
+  }
+
+  inFile >> statedNumCol;
+
+  if(inFile.fail())
+  {
+    inFile.clear();
+    inFile.ignore(100000000, '\n');
+    return false;
+  }
+
+  inFile.ignore(100000000, '\n');
+  getline(inFile, temp1);
+  tempLength1 = temp1.length();
+  ++countedRows;
+
+
+  if(CheckLineForVaildChars(temp1))
+  {
+    return false;
+  }
+
+
+  while(inFile && !inFile.eof() && tempLength2 != 0)
+  {
+    ++countedRows;
+
+    getline(inFile, temp2);
+    tempLength2 = temp2.length();
+
+
+    if(tempLength1 != tempLength2 && tempLength2 != 0)
+    {
+      return false;
+    }
+  }//while(inFile && !inFile.eof() && tempLength2 != 0)
+
+
+  return true;
+}
 
 string GetInputFileName()
 {
@@ -239,7 +307,16 @@ string GetInputFileName()
     //check if file exists
     if(inFile)
     {
-      isNotValid = false; //is valid
+      if(InputFormatedCorrectly(inFile))
+      {
+        isNotValid = false; //is valid
+      }
+      else
+      {
+        cout << "Sorry, the file, \"" << fileName << "\", was not formatted correctly.\n";
+        isNotValid = true; //repeat loop
+      }
+
     }
     else
     {
@@ -265,31 +342,4 @@ string GetFileName()
   stringLength = fileName.length();
 
   return fileName;
-}
-
-
-
-void RunSimulation(GameMode* &myGameMode, ostream& output)
-{
-  output << "\n\nWORKING CORRECTLY\n\n";
-
-
-
-
-
-
-
-
-  //Carry out the simulation
-  //If the simulation is infinite, just keep running. But if the world becomes empty or stabilizes,
-      //the simulation should halt and ask the user to press “enter” to exit the program.
-
-/*
-  while(!currentGameMode -> IsStable())
-  {
-
-  }
-*/
-
-
 }
